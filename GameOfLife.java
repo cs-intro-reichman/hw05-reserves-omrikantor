@@ -14,7 +14,7 @@ public class GameOfLife {
 		//// test1(fileName);
 		//// test2(fileName);
 		//// test3(fileName, 3);
-		//// play(fileName);
+		play(fileName);
 	}
 	
 	// Reads the data file and prints the initial board.
@@ -64,7 +64,7 @@ public class GameOfLife {
 		In in = new In(fileName); // Constructs an In object for reading the input file
 		int rows = Integer.parseInt(in.readLine());
 		int cols = Integer.parseInt(in.readLine());
-		int[][] board = new int[rows + 2][cols + 2];
+		int[][] board = new int[rows][cols];
 		for(int i = 0; i < board[0].length; i++)
 		{
 			board[0][i] = 0;
@@ -75,21 +75,21 @@ public class GameOfLife {
 			board[i][0] = 0;
 			board[i][board[0].length - 1] = 0;
 		}
-		for(int i = 1; i < rows; i++)
+		for(int i = 0; i < rows; i++)
 		{
 			String st = in.readLine();
 			if (st.isEmpty()) 
 			{
-				for (int j = 1; j < board[0].length; j++)
+				for (int j = 0; j < cols; j++)
 				{
 					board[i][j] = 0;
 				}
 			}
 			else
 			{
-			    for(int j = 1; j <= st.length(); j++)
+			    for(int j = 0; j < st.length(); j++)
 			    {
-				if (st.charAt(j - 1) ==  'x') 
+				if (st.charAt(j) ==  'x') 
 				{
 					board[i][j] = 1;
 				}
@@ -98,7 +98,7 @@ public class GameOfLife {
 					board[i][j] = 0;
 				}
 			    }
-				for(int j = st.length() + 1; j < board[0].length; j++)
+				for(int j = st.length(); j < board[0].length; j++)
 				{
 					board[i][j] = 0;
 				}
