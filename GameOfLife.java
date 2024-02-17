@@ -180,7 +180,7 @@ public class GameOfLife {
 				}
 			}
 		}
-		if (board[i][j] == 1) 
+		if ((board[i][j] == 1) && (c!=0)) 
 		{
 			c--;	
 		}
