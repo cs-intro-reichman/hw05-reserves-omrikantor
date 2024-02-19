@@ -170,12 +170,27 @@ public class GameOfLife {
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	public static int count(int[][] board, int i, int j) {
 		int c = 0;
-		if ((i >= board.length) || (j >= board.length))
+		if ((i > board.length) || (j > board.length))
 		{
 			return 0;
 		}
 		else
 		{
+			if((i == board.length) || (j == board[0].length))
+			{
+				for (int s = i-2; s < i; s++)
+				{
+					for (int t = j-2; t < j; t++)
+					{
+						if((board[s][t] == 1))
+				        {
+					       c++;
+				        }
+					}
+				}
+			}
+			else
+			{
 		if ((i-1!=0) && (j-1!=0)) 
 		{
 		for (int s = i - 2; s <= i; s++)
@@ -188,6 +203,7 @@ public class GameOfLife {
 				}
 			}
 		}
+	}
 		if ((board[i-1][j-1] == 1) && (c!=0)) 
 		{
 			c--;	
@@ -196,7 +212,7 @@ public class GameOfLife {
 	}	
 	return c;
 }
-}
+		}
 	
 	// Prints the board. Alive and dead cells are printed as 1 and 0, respectively.
     public static void print(int[][] arr) {
