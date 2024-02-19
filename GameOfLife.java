@@ -12,7 +12,7 @@ public class GameOfLife {
 		//// Uncomment the test that you want to execute, and re-compile.
 		//// (Run one test at a time).
 		//// test1(fileName);
-		//// test2(fileName);
+		test2(fileName);
 		test3(fileName, 3);
 		//// play(fileName);
 	}
@@ -27,8 +27,8 @@ public class GameOfLife {
 	// the count and cellValue functions.
 	private static void test2(String fileName) {
 		int[][] board = read(fileName);
-		System.out.println(count(board, 3, 3));
-		System.out.println(cellValue(board, 3, 3));
+		System.out.println(count(board, 2, 2));
+		System.out.println(cellValue(board, 2, 2));
 	}
 		
 	// Reads the data file, plays the game for Ngen generations, 
@@ -122,11 +122,11 @@ public class GameOfLife {
 			newboard[i][0] = 0;
 			newboard[i][newboard[0].length - 1] = 0;
 		}
-		for(int i = 1; i < board.length - 1; i++)
+		for(int i = 2; i < board.length; i++)
 		{
-			for(int j = 1; j < board [0].length - 1; j++)
+			for(int j = 2; j < board [0].length; j++)
 			{
-				newboard[i][j] = cellValue(board, i, j);
+				newboard[i-1][j-1] = cellValue(board, i, j);
 			}
 		}
 		return newboard;
@@ -143,7 +143,7 @@ public class GameOfLife {
 	// Uses the count(board,i,j) function to count the number of alive neighbors.
 	public static int cellValue(int[][] board, int i, int j) 
 	{
-		if (board[i][j] == 1)
+		if (board[i-1][j-1] == 1)
 		{
 			if((count(board, i, j) < 2) || (count(board, i, j) > 3))
 			{
@@ -170,11 +170,11 @@ public class GameOfLife {
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	public static int count(int[][] board, int i, int j) {
 		int c = 0;
-		if ((i!=0) && (j!=0)) 
+		if ((i-1!=0) && (j-1!=0)) 
 		{
-		for (int s = i - 1; s <= i + 1; s++)
+		for (int s = i - 2; s <= i; s++)
 		{
-			for(int t = j - 1; t <= j + 1; t++)
+			for(int t = j - 2; t <= j; t++)
 			{
 				if((board[s][t] == 1))
 				{
@@ -182,16 +182,13 @@ public class GameOfLife {
 				}
 			}
 		}
-		if ((board[i][j] == 1) && (c!=0)) 
+		if ((board[i-1][j-1] == 1) && (c!=0)) 
 		{
 			c--;	
 		}
 		return c;
 	}
-	else
-	{
-		return 0;
-	}
+	return c;
 	}
 	
 	// Prints the board. Alive and dead cells are printed as 1 and 0, respectively.
